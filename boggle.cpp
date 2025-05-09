@@ -96,4 +96,20 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 {
 //add your solution here!
 
+		if (r >= board.size() || c >= board[0].size()) return false;
+		std::string token = word + board[r][c];
+
+  	if (prefix.find(token) == prefix.end() && dict.find(token) == dict.end()) {
+      	return false;
+    }
+
+    bool progressed = boggleHelper(dict, prefix, board, token, result, r + dr, c + dc, dr, dc);
+
+    if (!progressed && dict.count(token)) {
+        result.insert(token);
+        return true;
+    }
+
+    return progressed;
+
 }
